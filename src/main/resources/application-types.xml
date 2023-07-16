@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="out" format="json">
+      <types:shape format="weave" example="examples/out-1.json"><![CDATA[%dw 2.0
+
+type out = Array<{|  digital_assets: String,   content_id: String,   product_ids: String,   dam_upload_status: String,   asset_serv_last_modified_date: String,   expiration_date: String,   "salsify:name": String,   "salsify:url": String|}> {"example": "[{\\\"digital_assets\\\":\\\"abc\\\",\\\"content_id\\\":\\\"abc\\\",\\\"product_ids\\\":\\\"abc\\\",\\\"dam_upload_status\\\":\\\"abc\\\",\\\"asset_serv_last_modified_date\\\":\\\"abc\\\",\\\"expiration_date\\\":\\\"abc\\\",\\\"salsify:name\\\":\\\"abc\\\",\\\"salsify:url\\\":\\\"abc\\\"}]"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="in" format="json">
+      <types:shape format="weave" example="examples/in.json"><![CDATA[%dw 2.0
+
+type in = {|
+  "DAP-ResourceType": String, 
+  "DAP-DestinationType": String, 
+  "DAP-BatchSize": Number {"typeId": "int"}, 
+  contentMetadata: {|
+    Assets: Array<{|      assetId: String,       productCodeUPC: String,       damUploadStatus: String,       modifiedDate: String,       assetExpireDate: String,       assetFileName: String,       assetFileUrl: String    |}>
+  |}
+|} {"example": "{\\\"DAP-ResourceType\\\":\\\"AssetServ\\\",\\\"DAP-DestinationType\\\":\\\"Salsify-Orch\\\",\\\"DAP-BatchSize\\\":2,\\\"contentMetadata\\\":{\\\"Assets\\\":[{\\\"assetId\\\":\\\"71268615\\\",\\\"productCodeUPC\\\":\\\"70501103784\\\",\\\"damUploadStatus\\\":\\\"Published\\\",\\\"modifiedDate\\\":\\\"2022-08-01T17:16:00.139Z\\\",\\\"assetExpireDate\\\":\\\"2022-11-19T05:00:00.000Z\\\",\\\"assetFileName\\\":\\\"NTG_70501154205_HB_HydroBoost_Jar_Mask_MULCO.JPEG\\\",\\\"assetFileUrl\\\":\\\"https:\\/\\/dam.jnj\\/Conversion\\/assetServices\\/downloadfile?uuid=27284e68-10c0-4d03-b2a8-7381ca71cf15\\\"},{\\\"assetId\\\":\\\"81268615\\\",\\\"productCodeUPC\\\":\\\"70501103785\\\",\\\"damUploadStatus\\\":\\\"Published\\\",\\\"modifiedDate\\\":\\\"2022-11-01T17:16:00.139Z\\\",\\\"assetExpireDate\\\":\\\"2022-12-19T05:00:00.000Z\\\",\\\"assetFileName\\\":\\\"NTG_70501154205_HB_HydroBoost_Jar_Mask_MULCO.JPEG\\\",\\\"assetFileUrl\\\":\\\"https:\\/\\/dam.jnj\\/Conversion\\/assetServices\\/downloadfile?uuid=37284e68-10c0-4d03-b2a8-7381ca71cf15\\\"}]}}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="e1" format="json">
+      <types:shape format="weave" example="examples/e1.json"><![CDATA[%dw 2.0
+
+type e1 = {|
+  "DAP-ResourceType": String, 
+  "DAP-DestinationType": String, 
+  SearchParameters: {|
+    damUploadStatus: Array<String>, 
+    publishedModifiedDate: {|
+      dateFrom: String, 
+      dateTo: String
+    |}, 
+    expired: Boolean, 
+    platform: Array<String>, 
+    productMarket: Array<String>, 
+    tags: Array<String>, 
+    restrictedComponent: String, 
+    geography: String, 
+    channel: String, 
+    subSegment: String, 
+    segment: String, 
+    subCategory: String, 
+    productCategory: String, 
+    needState: String, 
+    productVariant: String, 
+    subBrand: String, 
+    brand: String, 
+    franchise: String, 
+    intendedAudience: Array<String>, 
+    channelType: Array<String>, 
+    language: String, 
+    reference: Array<Any>, 
+    usageRightsCoordinatorEmail: String, 
+    usageRightsCoordinatorName: String, 
+    rawMaterialCode: String, 
+    productCodes: Array<String>, 
+    agencyId: String, 
+    agencyContentContact: String, 
+    product360EnhancedContent: String, 
+    product360VisibilityRestriction: String, 
+    copyApprovalId: String, 
+    usageRightsNotes: String, 
+    usageRightsStatement: String, 
+    campaignName: String, 
+    brandReference: Boolean, 
+    agencyLocation: String, 
+    agency: String, 
+    assetSource: String, 
+    title: String, 
+    contentAMT: String, 
+    jjContentAMT: String, 
+    talentandlifestyle: Array<String>, 
+    jnjContentOwner: String, 
+    region: String, 
+    market: String, 
+    cluster: String, 
+    subcluster: String, 
+    stockPhotoHouse: String, 
+    stockImageID: String, 
+    adID: String, 
+    contentLength: String, 
+    imageResolution: String, 
+    assetId: String, 
+    contentType: String, 
+    contentSubType: String, 
+    talentname: String, 
+    contentExpiryDate: String
+  |}
+|} {"example": "{\\\"DAP-ResourceType\\\":\\\"AssetServ\\\",\\\"DAP-DestinationType\\\":\\\"Salsify-Orch\\\",\\\"SearchParameters\\\":{\\\"damUploadStatus\\\":[\\\"Published\\\",\\\"Archived\\\"],\\\"publishedModifiedDate\\\":{\\\"dateFrom\\\":\\\"2022-12-01\\\",\\\"dateTo\\\":\\\"2022-12-03\\\"},\\\"expired\\\":false,\\\"platform\\\":[\\\"Instagram\\\"],\\\"productMarket\\\":[\\\"US\\\",\\\"Canada\\\",\\\"France\\\",\\\"Poland\\\"],\\\"tags\\\":[\\\"Squeezing\\\",\\\"friendly\\\"],\\\"restrictedComponent\\\":\\\"All\\\",\\\"geography\\\":\\\"Global\\\",\\\"channel\\\":\\\"All channels\\\",\\\"subSegment\\\":\\\"Burned Skin Treatment\\\",\\\"segment\\\":\\\"Burned Skin Treatment\\\",\\\"subCategory\\\":\\\"Burned Skin Treatment\\\",\\\"productCategory\\\":\\\"Burned Skin Treatment\\\",\\\"needState\\\":\\\"Other Beauty\\\",\\\"productVariant\\\":\\\"All Other Baby Care Variant\\\",\\\"subBrand\\\":\\\"All Other Baby Care SubBrand\\\",\\\"brand\\\":\\\"All Other Baby Care Brand\\\",\\\"franchise\\\":\\\"Essential Health\\\",\\\"intendedAudience\\\":[\\\"HCP Health Care Professional\\\"],\\\"channelType\\\":[\\\"Conference\\/Event\\\",\\\"eCommerce\\/eRetail - Third Party\\\"],\\\"language\\\":\\\"Assamese\\\",\\\"reference\\\":[],\\\"usageRightsCoordinatorEmail\\\":\\\"Neeraj.gupta2@cognizant.com\\\",\\\"usageRightsCoordinatorName\\\":\\\"OWAK\\\",\\\"rawMaterialCode\\\":\\\"1254263524\\\",\\\"productCodes\\\":[\\\"125634512\\\",\\\"125652812\\\"],\\\"agencyId\\\":\\\"14253526\\\",\\\"agencyContentContact\\\":\\\"abc.gmail.com\\\",\\\"product360EnhancedContent\\\":\\\"Y\\\",\\\"product360VisibilityRestriction\\\":\\\"N\\\",\\\"copyApprovalId\\\":\\\"UK-NI-2100174\\\",\\\"usageRightsNotes\\\":\\\"This is for test\\\",\\\"usageRightsStatement\\\":\\\"J&J has global perpetual rights\\\",\\\"campaignName\\\":\\\"Aveeno Skin Care\\\",\\\"brandReference\\\":false,\\\"agencyLocation\\\":\\\"Albania\\\",\\\"agency\\\":\\\"140 BBDO (PTY) LTD\\\",\\\"assetSource\\\":\\\"Manual Upload\\\",\\\"title\\\":\\\"Small_cucumber vine\\\",\\\"contentAMT\\\":\\\"Original\\\",\\\"jjContentAMT\\\":\\\"\\\",\\\"talentandlifestyle\\\":[\\\"UGC\\\"],\\\"jnjContentOwner\\\":\\\"Harshitha.Rachumallu@cognizant.com\\\",\\\"region\\\":\\\"NA\\\",\\\"market\\\":\\\"Canada\\\",\\\"cluster\\\":\\\"Canada\\\",\\\"subcluster\\\":\\\"Canada\\\",\\\"stockPhotoHouse\\\":\\\"\\\",\\\"stockImageID\\\":\\\"9999\\\",\\\"adID\\\":\\\"1234586956\\\",\\\"contentLength\\\":\\\"10:01:22\\\",\\\"imageResolution\\\":\\\"\\\",\\\"assetId\\\":\\\"28746971\\\",\\\"contentType\\\":\\\"Digital\\\",\\\"contentSubType\\\":\\\"Corporate Social Responsibility\\\",\\\"talentname\\\":\\\"Neeraj Gupta\\\",\\\"contentExpiryDate\\\":\\\"2022-12-01\\\"}}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="p1" format="json">
+      <types:shape format="weave" example="examples/p1.json"><![CDATA[%dw 2.0
+
+type p1 = {|
+  "DAP-ResourceType": String, 
+  "DAP-DestinationType": String, 
+  "DAP-BatchSize": Number {"typeId": "int"}, 
+  dateFrom: String, 
+  dateTo: String, 
+  SearchParameters: Array<{|    damAssetStatus: String,     publishedDate: {|      dateFrom: String,       dateTo: String    |},     expired: Boolean,     platform: Array<String>, 
+    productMarket: Array<String>, 
+    tags: Array<String>, 
+    restrictedComponent: String, 
+    geography: String, 
+    channel: String, 
+    subSegment: String, 
+    segment: String, 
+    subCategory: String, 
+    productCategory: String, 
+    needState: String, 
+    productVariant: String, 
+    subBrand: String, 
+    brand: String, 
+    franchise: String, 
+    intendedAudience: Array<String>, 
+    channelType: Array<String>, 
+    language: String, 
+    reference: Array<Any>, 
+    usageRightsCoordinatorEmail: String, 
+    usageRightsCoordinatorName: String, 
+    rawMaterialCode: String, 
+    productCodes: Array<String>, 
+    agencyId: String, 
+    agencyContentContact: String, 
+    product360EnhancedContent: String, 
+    product360VisibilityRestriction: String, 
+    copyApprovalId: String, 
+    usageRightsNotes: String, 
+    usageRightsStatement: String, 
+    campaignName: String, 
+    brandReference: Boolean, 
+    agencyLocation: String, 
+    agency: String, 
+    assetSource: String, 
+    title: String, 
+    contentAMT: String, 
+    jjContentAMT: String, 
+    talentandlifestyle: Array<String>, 
+    jnjContentOwner: String, 
+    region: String, 
+    market: String, 
+    cluster: String, 
+    subcluster: String, 
+    stockPhotoHouse: String, 
+    stockImageID: String, 
+    adID: String, 
+    contentLength: String, 
+    imageResolution: String, 
+    assetId: String, 
+    contentType: String, 
+    contentSubType: String, 
+    talentname: String, 
+    contentExpiryDate: String
+  |}>
+|} {"example": "{\\\"DAP-ResourceType\\\":\\\"AssetServ\\\",\\\"DAP-DestinationType\\\":\\\"Salsify-Orch\\\",\\\"DAP-BatchSize\\\":1,\\\"dateFrom\\\":\\\"2022-12-01\\\",\\\"dateTo\\\":\\\"2022-12-03\\\",\\\"SearchParameters\\\":[{\\\"damAssetStatus\\\":\\\"Published\\\",\\\"publishedDate\\\":{\\\"dateFrom\\\":\\\"2022-12-01\\\",\\\"dateTo\\\":\\\"2022-12-03\\\"},\\\"expired\\\":false,\\\"platform\\\":[\\\"Instagram\\\"],\\\"productMarket\\\":[\\\"US\\\",\\\"Canada\\\",\\\"France\\\",\\\"Poland\\\"],\\\"tags\\\":[\\\"Squeezing\\\",\\\"friendly\\\"],\\\"restrictedComponent\\\":\\\"All\\\",\\\"geography\\\":\\\"Global\\\",\\\"channel\\\":\\\"All channels\\\",\\\"subSegment\\\":\\\"Burned Skin Treatment\\\",\\\"segment\\\":\\\"Burned Skin Treatment\\\",\\\"subCategory\\\":\\\"Burned Skin Treatment\\\",\\\"productCategory\\\":\\\"Burned Skin Treatment\\\",\\\"needState\\\":\\\"Other Beauty\\\",\\\"productVariant\\\":\\\"All Other Baby Care Variant\\\",\\\"subBrand\\\":\\\"All Other Baby Care SubBrand\\\",\\\"brand\\\":\\\"All Other Baby Care Brand\\\",\\\"franchise\\\":\\\"Essential Health\\\",\\\"intendedAudience\\\":[\\\"HCP Health Care Professional\\\"],\\\"channelType\\\":[\\\"Conference\\/Event\\\",\\\"eCommerce\\/eRetail - Third Party\\\"],\\\"language\\\":\\\"Assamese\\\",\\\"reference\\\":[],\\\"usageRightsCoordinatorEmail\\\":\\\"Neeraj.gupta2@cognizant.com\\\",\\\"usageRightsCoordinatorName\\\":\\\"OWAK\\\",\\\"rawMaterialCode\\\":\\\"1254263524\\\",\\\"productCodes\\\":[\\\"125634512\\\",\\\"125652812\\\"],\\\"agencyId\\\":\\\"14253526\\\",\\\"agencyContentContact\\\":\\\"abc.gmail.com\\\",\\\"product360EnhancedContent\\\":\\\"Y\\\",\\\"product360VisibilityRestriction\\\":\\\"N\\\",\\\"copyApprovalId\\\":\\\"UK-NI-2100174\\\",\\\"usageRightsNotes\\\":\\\"This is for test\\\",\\\"usageRightsStatement\\\":\\\"J&J has global perpetual rights\\\",\\\"campaignName\\\":\\\"Aveeno Skin Care\\\",\\\"brandReference\\\":false,\\\"agencyLocation\\\":\\\"Albania\\\",\\\"agency\\\":\\\"140 BBDO (PTY) LTD\\\",\\\"assetSource\\\":\\\"Manual Upload\\\",\\\"title\\\":\\\"Small_cucumber vine\\\",\\\"contentAMT\\\":\\\"Original\\\",\\\"jjContentAMT\\\":\\\"\\\",\\\"talentandlifestyle\\\":[\\\"UGC\\\"],\\\"jnjContentOwner\\\":\\\"Harshitha.Rachumallu@cognizant.com\\\",\\\"region\\\":\\\"NA\\\",\\\"market\\\":\\\"Canada\\\",\\\"cluster\\\":\\\"Canada\\\",\\\"subcluster\\\":\\\"Canada\\\",\\\"stockPhotoHouse\\\":\\\"\\\",\\\"stockImageID\\\":\\\"9999\\\",\\\"adID\\\":\\\"1234586956\\\",\\\"contentLength\\\":\\\"10:01:22\\\",\\\"imageResolution\\\":\\\"\\\",\\\"assetId\\\":\\\"28746971\\\",\\\"contentType\\\":\\\"Digital\\\",\\\"contentSubType\\\":\\\"Corporate Social Responsibility\\\",\\\"talentname\\\":\\\"Neeraj Gupta\\\",\\\"contentExpiryDate\\\":\\\"2022-12-01\\\"},{\\\"damAssetStatus\\\":\\\"Archived\\\",\\\"publishedDate\\\":{\\\"dateFrom\\\":\\\"2022-12-01\\\",\\\"dateTo\\\":\\\"2022-12-03\\\"},\\\"expired\\\":false,\\\"platform\\\":[\\\"Instagram\\\"],\\\"productMarket\\\":[\\\"US\\\",\\\"Canada\\\",\\\"France\\\",\\\"Poland\\\"],\\\"tags\\\":[\\\"Squeezing\\\",\\\"friendly\\\"],\\\"restrictedComponent\\\":\\\"All\\\",\\\"geography\\\":\\\"Global\\\",\\\"channel\\\":\\\"All channels\\\",\\\"subSegment\\\":\\\"Burned Skin Treatment\\\",\\\"segment\\\":\\\"Burned Skin Treatment\\\",\\\"subCategory\\\":\\\"Burned Skin Treatment\\\",\\\"productCategory\\\":\\\"Burned Skin Treatment\\\",\\\"needState\\\":\\\"Other Beauty\\\",\\\"productVariant\\\":\\\"All Other Baby Care Variant\\\",\\\"subBrand\\\":\\\"All Other Baby Care SubBrand\\\",\\\"brand\\\":\\\"All Other Baby Care Brand\\\",\\\"franchise\\\":\\\"Essential Health\\\",\\\"intendedAudience\\\":[\\\"HCP Health Care Professional\\\"],\\\"channelType\\\":[\\\"Conference\\/Event\\\",\\\"eCommerce\\/eRetail - Third Party\\\"],\\\"language\\\":\\\"Assamese\\\",\\\"reference\\\":[],\\\"usageRightsCoordinatorEmail\\\":\\\"Neeraj.gupta2@cognizant.com\\\",\\\"usageRightsCoordinatorName\\\":\\\"OWAK\\\",\\\"rawMaterialCode\\\":\\\"1254263524\\\",\\\"productCodes\\\":[\\\"125634512\\\",\\\"125652812\\\"],\\\"agencyId\\\":\\\"14253526\\\",\\\"agencyContentContact\\\":\\\"abc.gmail.com\\\",\\\"product360EnhancedContent\\\":\\\"Y\\\",\\\"product360VisibilityRestriction\\\":\\\"N\\\",\\\"copyApprovalId\\\":\\\"UK-NI-2100174\\\",\\\"usageRightsNotes\\\":\\\"This is for test\\\",\\\"usageRightsStatement\\\":\\\"J&J has global perpetual rights\\\",\\\"campaignName\\\":\\\"Aveeno Skin Care\\\",\\\"brandReference\\\":false,\\\"agencyLocation\\\":\\\"Albania\\\",\\\"agency\\\":\\\"140 BBDO (PTY) LTD\\\",\\\"assetSource\\\":\\\"Manual Upload\\\",\\\"title\\\":\\\"Small_cucumber vine\\\",\\\"contentAMT\\\":\\\"Original\\\",\\\"jjContentAMT\\\":\\\"\\\",\\\"talentandlifestyle\\\":[\\\"UGC\\\"],\\\"jnjContentOwner\\\":\\\"Harshitha.Rachumallu@cognizant.com\\\",\\\"region\\\":\\\"NA\\\",\\\"market\\\":\\\"Canada\\\",\\\"cluster\\\":\\\"Canada\\\",\\\"subcluster\\\":\\\"Canada\\\",\\\"stockPhotoHouse\\\":\\\"\\\",\\\"stockImageID\\\":\\\"9999\\\",\\\"adID\\\":\\\"1234586956\\\",\\\"contentLength\\\":\\\"10:01:22\\\",\\\"imageResolution\\\":\\\"\\\",\\\"assetId\\\":\\\"28746971\\\",\\\"contentType\\\":\\\"Digital\\\",\\\"contentSubType\\\":\\\"Corporate Social Responsibility\\\",\\\"talentname\\\":\\\"Neeraj Gupta\\\",\\\"contentExpiryDate\\\":\\\"2022-12-01\\\"},{\\\"damAssetStatus\\\":\\\"Modified\\\",\\\"publishedDate\\\":{\\\"dateFrom\\\":\\\"2022-12-01\\\",\\\"dateTo\\\":\\\"2022-12-03\\\"},\\\"expired\\\":false,\\\"platform\\\":[\\\"Instagram\\\"],\\\"productMarket\\\":[\\\"US\\\",\\\"Canada\\\",\\\"France\\\",\\\"Poland\\\"],\\\"tags\\\":[\\\"Squeezing\\\",\\\"friendly\\\"],\\\"restrictedComponent\\\":\\\"All\\\",\\\"geography\\\":\\\"Global\\\",\\\"channel\\\":\\\"All channels\\\",\\\"subSegment\\\":\\\"Burned Skin Treatment\\\",\\\"segment\\\":\\\"Burned Skin Treatment\\\",\\\"subCategory\\\":\\\"Burned Skin Treatment\\\",\\\"productCategory\\\":\\\"Burned Skin Treatment\\\",\\\"needState\\\":\\\"Other Beauty\\\",\\\"productVariant\\\":\\\"All Other Baby Care Variant\\\",\\\"subBrand\\\":\\\"All Other Baby Care SubBrand\\\",\\\"brand\\\":\\\"All Other Baby Care Brand\\\",\\\"franchise\\\":\\\"Essential Health\\\",\\\"intendedAudience\\\":[\\\"HCP Health Care Professional\\\"],\\\"channelType\\\":[\\\"Conference\\/Event\\\",\\\"eCommerce\\/eRetail - Third Party\\\"],\\\"language\\\":\\\"Assamese\\\",\\\"reference\\\":[],\\\"usageRightsCoordinatorEmail\\\":\\\"Neeraj.gupta2@cognizant.com\\\",\\\"usageRightsCoordinatorName\\\":\\\"OWAK\\\",\\\"rawMaterialCode\\\":\\\"1254263524\\\",\\\"productCodes\\\":[\\\"125634512\\\",\\\"125652812\\\"],\\\"agencyId\\\":\\\"14253526\\\",\\\"agencyContentContact\\\":\\\"abc.gmail.com\\\",\\\"product360EnhancedContent\\\":\\\"Y\\\",\\\"product360VisibilityRestriction\\\":\\\"N\\\",\\\"copyApprovalId\\\":\\\"UK-NI-2100174\\\",\\\"usageRightsNotes\\\":\\\"This is for test\\\",\\\"usageRightsStatement\\\":\\\"J&J has global perpetual rights\\\",\\\"campaignName\\\":\\\"Aveeno Skin Care\\\",\\\"brandReference\\\":false,\\\"agencyLocation\\\":\\\"Albania\\\",\\\"agency\\\":\\\"140 BBDO (PTY) LTD\\\",\\\"assetSource\\\":\\\"Manual Upload\\\",\\\"title\\\":\\\"Small_cucumber vine\\\",\\\"contentAMT\\\":\\\"Original\\\",\\\"jjContentAMT\\\":\\\"\\\",\\\"talentandlifestyle\\\":[\\\"UGC\\\"],\\\"jnjContentOwner\\\":\\\"Harshitha.Rachumallu@cognizant.com\\\",\\\"region\\\":\\\"NA\\\",\\\"market\\\":\\\"Canada\\\",\\\"cluster\\\":\\\"Canada\\\",\\\"subcluster\\\":\\\"Canada\\\",\\\"stockPhotoHouse\\\":\\\"\\\",\\\"stockImageID\\\":\\\"9999\\\",\\\"adID\\\":\\\"1234586956\\\",\\\"contentLength\\\":\\\"10:01:22\\\",\\\"imageResolution\\\":\\\"\\\",\\\"assetId\\\":\\\"28746971\\\",\\\"contentType\\\":\\\"Digital\\\",\\\"contentSubType\\\":\\\"Corporate Social Responsibility\\\",\\\"talentname\\\":\\\"Neeraj Gupta\\\",\\\"contentExpiryDate\\\":\\\"2022-12-01\\\"},{\\\"damAssetStatus\\\":\\\"Created\\\",\\\"publishedDate\\\":{\\\"dateFrom\\\":\\\"2022-12-01\\\",\\\"dateTo\\\":\\\"2022-12-03\\\"},\\\"expired\\\":false,\\\"platform\\\":[\\\"Instagram\\\"],\\\"productMarket\\\":[\\\"US\\\",\\\"Canada\\\",\\\"France\\\",\\\"Poland\\\"],\\\"tags\\\":[\\\"Squeezing\\\",\\\"friendly\\\"],\\\"restrictedComponent\\\":\\\"All\\\",\\\"geography\\\":\\\"Global\\\",\\\"channel\\\":\\\"All channels\\\"}]}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#645ff93c-4b00-4628-9764-6a60fe6dc296">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="in"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="out"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#191cce46-64c1-49df-ba2f-67beb9738519">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="e1"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="p1"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>

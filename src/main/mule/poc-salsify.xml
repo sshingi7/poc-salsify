@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:salsify-connector-mule-4="http://www.mulesoft.org/schema/mule/salsify-connector-mule-4"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/salsify-connector-mule-4 http://www.mulesoft.org/schema/mule/salsify-connector-mule-4/current/mule-salsify-connector-mule-4.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ca4c9e3b-56a1-469c-94a0-d205e4e189d5" >
+		<http:listener-connection host="0.0.0.0" port="${http.port}" />
+	</http:listener-config>
+	<salsify-connector-mule-4:config name="Salsify_Connector_Config" doc:name="Salsify Connector Config" doc:id="38bfa818-b1db-488a-af23-ace901cfdc22" >
+		<salsify-connector-mule-4:bearer-auth-connection token="${salsify.token}" />
+	</salsify-connector-mule-4:config>
+	<configuration-properties doc:name="Configuration properties" doc:id="dfd4daf3-afb9-4cdd-9280-f179aa81209b" file="properties.yaml" />
+	<flow name="poc-salsify-create-main-flow" doc:id="c833d150-7059-42a8-8aaa-5b3a29bb1a65" >
+		<http:listener doc:name="Listener" doc:id="08cd83b6-993e-4444-8602-faf2a91022b4" config-ref="HTTP_Listener_config" path="/createDA"/>
+		<logger level="INFO" doc:name="Logger: Start" doc:id="1f5f2d4a-db88-4c8e-a207-72994c675084" message="Start"/>
+		<logger level="INFO" doc:name="Before call Logger: payload" doc:id="772d776e-7f25-474c-919c-835f7f8f9a13" message="#[payload]"/>
+		<salsify-connector-mule-4:create-digital-asset doc:name="Create Digital Asset" doc:id="73117181-a810-4f2d-a1ac-0d9401efeffa" config-ref="Salsify_Connector_Config" organizationIdUriParam="${salsify.organizationId}"/>
+		<logger level="INFO" doc:name="After call Logger: payload" doc:id="ff0e57d0-e318-401f-adc6-f2c9a3782461" message="#[payload]"/>
+		<logger level="INFO" doc:name="Logger: End" doc:id="55f2f121-eeaa-4132-b973-e790939d4e1f" message="End"/>
+	</flow>
+	<flow name="poc-salsify-get-digital-asset-main-flow" doc:id="b9dbde39-3533-40d6-814c-56c0a1085896" >
+		<http:listener doc:name="Listener" doc:id="a889237b-efd5-40a8-87a3-066ea655e506" config-ref="HTTP_Listener_config" path="/getDA/{DA_Id}"/>
+		<logger level="INFO" doc:name="Logger: Start" doc:id="3c900eb0-705d-4ada-abbd-ff78884e6fc8" message="Start"/>
+		<salsify-connector-mule-4:read-digital-asset-metadata doc:name="Read Digital Asset Metadata" doc:id="b21bc4c8-b81a-4e21-9f78-7495091031ee" config-ref="Salsify_Connector_Config" organizationIdUriParam="${salsify.organizationId}" digitalAssetIdUriParam="#[attributes.uriParams.'DA_Id']"/>
+		<logger level="INFO" doc:name="After call Logger: payload" doc:id="51c56a60-e3fc-4788-9ee6-27c46af5c028" message="#[payload]"/>
+		<logger level="INFO" doc:name="Logger End" doc:id="69bbd2b6-8a06-4edc-8035-46d60aa0f255" message="End"/>
+	</flow>
+</mule>

@@ -1,0 +1,6 @@
+http:
+  port: '8081'
+
+salsify:
+  token: '' #add token 
+  organizationId: '' #add orgId
