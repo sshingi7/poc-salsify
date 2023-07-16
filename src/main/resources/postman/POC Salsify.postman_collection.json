@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "3fc99c8a-1e9f-4bf8-a391-d0bc4a93f883",
+		"name": "POC Salsify",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22807705"
+	},
+	"item": [
+		{
+			"name": "Get Digital Asset",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/getDA/123456",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getDA",
+						"123456"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Digital Asset",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"salsify:source_url\":\"https://akm-img-a-in.tosshub.com/indiatoday/images/story/202209/Baby_powder_1200x768.jpeg?VersionId=LoX67lkMDBUEjGPSLsEgTfNLJfRM8waX&size=690:388\",\r\n    \"salsify:id\":\"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/createDA",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"createDA"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
